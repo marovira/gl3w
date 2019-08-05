@@ -49,6 +49,7 @@ target_include_directories(gl3w PUBLIC
     )
 target_compile_features(gl3w PUBLIC cxx_std_17)
 target_link_libraries(gl3w PUBLIC OpenGL::GL)
+add_library(gl3w::gl3w ALIAS gl3w)
 
 # Now make gl3w depend on the generator target
 add_dependencies(gl3w gl3w_gen)
