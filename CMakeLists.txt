@@ -48,7 +48,13 @@ target_include_directories(gl3w PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
     )
 target_compile_features(gl3w PUBLIC cxx_std_17)
-target_link_libraries(gl3w PUBLIC OpenGL::GL)
+
+if (UNIX AND NOT APPLE)
+    target_link_libraries(gl3w PUBLIC OpenGL::GL ${CMAKE_DL_LIBS})
+else()
+    target_link_libraries(gl3w PUBLIC OpenGL::GL)
+endif()
+
 add_library(gl3w::gl3w ALIAS gl3w)
 
 # Now make gl3w depend on the generator target
